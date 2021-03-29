@@ -35,7 +35,7 @@ $.ajax({
             <p>Wind Speed: ${windSpeed}MPH</p>
             <p>UV Index: ${uvi}</p>
         `;
-        
+        $(".top").html(todayHTML);
         
         
         var html = "";
