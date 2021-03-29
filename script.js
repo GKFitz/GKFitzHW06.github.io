@@ -26,6 +26,19 @@ $.ajax({
             var forecastedDays = new Date(day.dt * 1000);
             console.log(day)
             var date = forecastedDays.toLocaleDateString();
+            var humidity = day.humidity;
+            var temp= day.temp.day;
+            var icon= day.weather[0].icon;
+            html =`
+            <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+            <div class="card-header">${date}</div>
+            <div class="card-body">
+              <h5 class="card-title"><img src="https://openweathermap.org/img/w/${icon}.png"><h5>
+              <p class="card-text">Temp: ${temp}&deg;F</p>
+              <p class="card-text">Humidity: ${humidity}%</p>
+            </div>
+            </div>`;
+            
             //console.log(Date.datestring(forecastedDays.dt))
         }
         //inject HTML into the object. converts the js string into actual HTML elements
