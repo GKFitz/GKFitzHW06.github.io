@@ -28,12 +28,18 @@ $.ajax({
         var currentIcon= today.weather[0].icon;
         var uvi = today.uvi;
         var windSpeed = today.wind_speed;
+        //use the class uvi created in the html to target the uvi with a backgroud color system in the css
+        var uviClass;
+        if(uvi < 6) {
+           uviClass= "moderate"; 
+        }
+        console.log("uvi");
         var todayHTML = `
             <h2>${city}, ${currentDate} <img src="https://openweathermap.org/img/w/${currentIcon}@2x.png"></h2>
             <p>Temp: ${currentTemp}&deg;F</p>
             <p>Humidity: ${currentHumidity}%</p>
             <p>Wind Speed: ${windSpeed}MPH</p>
-            <p>UV Index: ${uvi}</p>
+            <p>UV Index:<span class= "${uviClass} uvi" >${uvi}</span></p>
         `;
         $(".top").html(todayHTML);
         
