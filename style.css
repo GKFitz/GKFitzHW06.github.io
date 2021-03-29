@@ -13,6 +13,12 @@ h2 {
     background-color: red;
     width: 100%;
 }
+h3 {
+    text-size-adjust: 5px;
+}
+.search {
+    padding-bottom: 10px;
+}
 #search_history {
     width: 10%;
 }

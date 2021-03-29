@@ -20,6 +20,16 @@ $.ajax({
         method: "GET",
     })
     .then(function(data2){
+        var today = data2.daily[0];
+        console.log(today)
+        var currentDate = (new Date(today.dt * 1000)).toLocaleDateString();
+        var currentHumidity = today.humidity;
+        var currentTemp= today.temp.day;
+        var currentIcon= today.weather[0].icon;
+        var uvi = today.uvi;
+        var windSpeed = today.wind_speed;
+        
+        
         var html = "";
         for(var i= 1; i< 6; i++){
             var day = data2.daily[i];
@@ -41,7 +51,7 @@ $.ajax({
             
             //console.log(Date.datestring(forecastedDays.dt))
         }
-        //inject HTML into the object. converts the js string into actual HTML elements
+        //inject HTML into the object. converts the js string into actual HTML elements targets the bottom container in the index.html
         $(".bottom").html(html);
     })
 
