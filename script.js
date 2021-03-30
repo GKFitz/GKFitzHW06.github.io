@@ -1,8 +1,32 @@
 // 
 // api.openweathermap.org/data/2.5/weather?q=Atlanta&appid=5a5fc8508fe3901a1ad7e6702d8452ee
+var searchBox= document.getElementById("searchBox");
+var searchBtn= document.getElementById("searchBtn");
 
-console.log("connected")
-var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=New%20York&appid=5a5fc8508fe3901a1ad7e6702d8452ee&units=imperial";
+var savedCities= JSON.parse(localStorage.getItem("savedCities")) || [];
+
+$("#searchBtn").on("click", function(event){
+    event.preventDefault();
+    var citySearch= searchBox.value;
+    savedCities.push(citySearch);
+    localStorage.setItem("savedCities", JSON.stringify(savedCities));
+    console.log(citySearch);
+    searchCity(citySearch);
+    // searchList(citySearch);
+})
+function searchList() {
+    for(var i= 0; i < savedCities.length; i++){
+        var htmlList = `<a class="list-group-item list-group-item-action" href="#list-item-1"> ${savedCities[i]}</a>`;
+        $("#search-history").html(htmlList);
+    }
+
+}
+
+function searchCity(citySearch) {
+
+
+
+var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + citySearch + "&appid=5a5fc8508fe3901a1ad7e6702d8452ee&units=imperial";
 
 // var queryURL2= "https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid=5a5fc8508fe3901a1ad7e6702d8452ee"
 
@@ -61,7 +85,7 @@ $.ajax({
             var humidity = day.humidity;
             var temp= day.temp.day;
             var icon= day.weather[0].icon;
-            html =`
+            html +=`
             <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
             <div class="card-header">${date}</div>
             <div class="card-body">
@@ -80,6 +104,12 @@ $.ajax({
     console.log(data)
     
 })
+}
+$( document ).ready(function() {
+    searchList();
+});
+
+
 
 
 
