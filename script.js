@@ -15,6 +15,12 @@ $("#searchBtn").on("click", function(event){
     searchCity(citySearch);
 })
 
+$(".clearSearch").on("click", function(event){
+    localStorage.clear();
+    searchList();
+    
+})
+
 function searchList() {
     var htmlList= "";
     for(var i= 0; i < savedCities.length; i++){
