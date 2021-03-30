@@ -2,23 +2,33 @@
 var searchBox= document.getElementById("searchBox");
 var searchBtn= document.getElementById("searchBtn");
 var citiesFromLS= localStorage.getItem("savedCities");
+//ternary expression: if citiesFromLS exists, do a JSON.parse, if not return an the empty array
 var savedCities= citiesFromLS ? JSON.parse(citiesFromLS):[];
 
-
+//Put a script defer in the Html so I can use this.This conditional makes the last search item present, or in this case the first in the saved cities array, will produce its search result even when the user refreshes the app. the .focus() puts the cursor automatically in the search box for searching
+searchBox.focus();
+if(savedCities[0]) {
+    searchCity(savedCities[0]);
+}
 
 $("#searchBtn").on("click", function(event){
     event.preventDefault();
     var citySearch= searchBox.value;
-    savedCities.push(citySearch);
-    localStorage.setItem("savedCities", JSON.stringify(savedCities));
     console.log(citySearch);
     searchCity(citySearch);
+
+    searchBox.value= "";
+    searchBox.focus();
+    
 })
 
 $(".clearSearch").on("click", function(event){
     localStorage.clear();
+    //this will renew the empty array
+    savedCities = [];
     searchList();
-    
+    //this puts the cursor bakc into the 
+    searchBox.focus();
 })
 
 function searchList() {
@@ -56,6 +66,13 @@ $.ajax({
 .then(function(data){
     var queryURL2= `https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&appid=5a5fc8508fe3901a1ad7e6702d8452ee&units=imperial`
     var city = data.name;
+    //This conditional was put here to take advantage of the city variable, which pulls the city name straight from the API data, unshift() adds the most recent city search to the top of the list( rather than push which puts it at the bottom) and then it saves it to local storage.
+    if(!savedCities.includes(city)){
+        savedCities.unshift(city);
+        localStorage.setItem("savedCities", JSON.stringify(savedCities));
+        searchList();
+    }
+    
    
     
     $.ajax({
@@ -114,7 +131,7 @@ $.ajax({
             </div>
             </div>`;
             
-            //console.log(Date.datestring(forecastedDays.dt))
+            
         }
         //inject HTML into the object. converts the js string into actual HTML elements targets the bottom container in the index.html
         $(".bottom").html(html);
