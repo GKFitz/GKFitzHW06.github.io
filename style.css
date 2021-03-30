@@ -1,11 +1,12 @@
 
 h2 {
+    text-align: center;
     background-color: black;
     color: white;
     text-align: center;
     font-size: 75px;
-    padding-bottom: 30px;
-    padding-top: 30px;
+    padding-bottom: 20px;
+    padding-top: 20px;
 
 }   
 .right {
@@ -41,6 +42,10 @@ label {
     display: flex;
      
 } 
+p {
+    font-weight: bold;
+}
+
 /* .uvi {
     padding: 5px;
 
@@ -61,9 +66,9 @@ label {
     background-color: purple;
 }
 .forecastCard {
-    width: 30%;
+    width: 50%;
     display: flex;
     align-items: horizontal;
-    padding:10px;
+    padding: 0;
     
 }
