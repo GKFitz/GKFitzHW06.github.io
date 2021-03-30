@@ -33,3 +33,13 @@ h3 {
 .moderate {
     background-color: yellow;
 }
+.high {
+    background-color: orange;
+}
+.veryHigh {
+    background-color: red;
+}
+.extreme {
+    background-color: purple;
+}
+

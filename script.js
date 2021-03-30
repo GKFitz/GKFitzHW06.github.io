@@ -28,17 +28,25 @@ $.ajax({
         var currentIcon= today.weather[0].icon;
         var uvi = today.uvi;
         var windSpeed = today.wind_speed;
-        //use the class uvi created in the html to target the uvi with a backgroud color system in the css
+        //use the class uvi created in the html to target the uvi with a backgroud color system in the css. the color coding is based on the EPA UV color scale
         var uviClass;
-        if(uvi < 6) {
+        if (uvi < 3) {
+            uviClass= "low";
+        }else if(uvi < 6) {
            uviClass= "moderate"; 
+        }else if(uvi < 8) {
+            uviClass= "high"; 
+        }else if(uvi < 11) {
+            uviClass= "veryHigh";
+        } else {
+            uviClass= "extreme";
         }
         console.log("uvi");
         var todayHTML = `
-            <h2>${city}, ${currentDate} <img src="https://openweathermap.org/img/w/${currentIcon}@2x.png"></h2>
+            <h2>${city}, ${currentDate} <img src="https://openweathermap.org/img/wn/${currentIcon}@2x.png"></h2>
             <p>Temp: ${currentTemp}&deg;F</p>
             <p>Humidity: ${currentHumidity}%</p>
-            <p>Wind Speed: ${windSpeed}MPH</p>
+            <p>Wind Speed: ${windSpeed} MPH</p>
             <p>UV Index:<span class= "${uviClass} uvi" >${uvi}</span></p>
         `;
         $(".top").html(todayHTML);
