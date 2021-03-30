@@ -1,8 +1,10 @@
 
 var searchBox= document.getElementById("searchBox");
 var searchBtn= document.getElementById("searchBtn");
+var citiesFromLS= localStorage.getItem("savedCities");
+var savedCities= citiesFromLS ? JSON.parse(citiesFromLS):[];
 
-var savedCities= JSON.parse(localStorage.getItem("savedCities")) || [];
+
 
 $("#searchBtn").on("click", function(event){
     event.preventDefault();
@@ -11,16 +13,25 @@ $("#searchBtn").on("click", function(event){
     localStorage.setItem("savedCities", JSON.stringify(savedCities));
     console.log(citySearch);
     searchCity(citySearch);
-    
 })
+
 function searchList() {
+    var htmlList= "";
     for(var i= 0; i < savedCities.length; i++){
-        var htmlList = `<a class="list-group-item list-group-item-action" href="#list-item-1"> ${savedCities[i]}</a>`;
-        $(".searchHistory").html(htmlList);
+        htmlList += `<a class="list-group-item list-group-item-action" href="#list-item-1"> ${savedCities[i]}</a>`;
+       
         
     }
-    // $(".searchList").html(htmlList);
+    $(".searchHistory").html(htmlList);
+    var buttons = $(".searchHistory a" );
+    $.each(buttons, function(index, button){
+        $(button).on("click", function(){
+            searchCity($(this).text());
+        })
+
+    });
 }
+
 
 
 function searchCity(citySearch) {
@@ -39,6 +50,7 @@ $.ajax({
 .then(function(data){
     var queryURL2= `https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&appid=5a5fc8508fe3901a1ad7e6702d8452ee&units=imperial`
     var city = data.name;
+   
     
     $.ajax({
         url:queryURL2,
@@ -106,9 +118,8 @@ $.ajax({
     
 })
 }
-$( document ).ready(function() {
-    searchList();
-});
+searchList();
+
 
 
 
