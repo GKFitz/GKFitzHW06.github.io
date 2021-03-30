@@ -17,10 +17,11 @@ $("#searchBtn").on("click", function(event){
 function searchList() {
     for(var i= 0; i < savedCities.length; i++){
         var htmlList = `<a class="list-group-item list-group-item-action" href="#list-item-1"> ${savedCities[i]}</a>`;
-        $("#search-history").html(htmlList);
+        $(".searchHistory").html(htmlList);
     }
 
 }
+
 
 function searchCity(citySearch) {
 
