@@ -66,7 +66,7 @@ $.ajax({
 .then(function(data){
     var queryURL2= `https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&appid=5a5fc8508fe3901a1ad7e6702d8452ee&units=imperial`
     var city = data.name;
-    //This conditional was put here to take advantage of the city variable, which pulls the city name straight from the API data, unshift() adds the most recent city search to the top of the list( rather than push which puts it at the bottom) and then it saves it to local storage.
+    //This conditional was put here to take advantage of the city variable, which pulls the city name straight from the API data, unshift() adds the most recent city search to the top of the list( rather than push which puts it at the bottom) and then it saves it to local storage. the include(city helps prevent duplicates search results on the list
     if(!savedCities.includes(city)){
         savedCities.unshift(city);
         localStorage.setItem("savedCities", JSON.stringify(savedCities));
