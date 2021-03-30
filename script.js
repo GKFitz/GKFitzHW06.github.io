@@ -1,5 +1,4 @@
-// 
-// api.openweathermap.org/data/2.5/weather?q=Atlanta&appid=5a5fc8508fe3901a1ad7e6702d8452ee
+
 var searchBox= document.getElementById("searchBox");
 var searchBtn= document.getElementById("searchBtn");
 
@@ -12,14 +11,15 @@ $("#searchBtn").on("click", function(event){
     localStorage.setItem("savedCities", JSON.stringify(savedCities));
     console.log(citySearch);
     searchCity(citySearch);
-    // searchList(citySearch);
+    
 })
 function searchList() {
     for(var i= 0; i < savedCities.length; i++){
-        var htmlList = `<a class="list-group-item list-group-item-action" href="#list-item-1"> ${savedCities[i]}</a>`;
+        var htmlList = `<a class="list-group-item list-group-item-action" href="#list-item-1"> ${savedCities}</a>`;
         $(".searchHistory").html(htmlList);
+        
     }
-
+    // $(".searchList").html(htmlList);
 }
 
 
@@ -68,7 +68,7 @@ $.ajax({
         }
         console.log("uvi");
         var todayHTML = `
-            <h2>${city}, ${currentDate} <img src="https://openweathermap.org/img/wn/${currentIcon}@2x.png"></h2>
+            <h3>${city}, ${currentDate} <img src="https://openweathermap.org/img/wn/${currentIcon}@2x.png"></h3>
             <p>Temp: ${currentTemp}&deg;F</p>
             <p>Humidity: ${currentHumidity}%</p>
             <p>Wind Speed: ${windSpeed} MPH</p>
@@ -87,7 +87,7 @@ $.ajax({
             var temp= day.temp.day;
             var icon= day.weather[0].icon;
             html +=`
-            <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+            <div class="card text-white bg-primary mb-3 forecastCard" style="max-width: 18rem;">
             <div class="card-header">${date}</div>
             <div class="card-body">
               <h5 class="card-title"><img src="https://openweathermap.org/img/w/${icon}.png"><h5>
@@ -102,13 +102,13 @@ $.ajax({
         $(".bottom").html(html);
     })
 
-    console.log(data)
+    
     
 })
 }
-$( document ).ready(function() {
-    searchList();
-});
+// $( document ).ready(function() {
+//     searchList();
+// });
 
 
 

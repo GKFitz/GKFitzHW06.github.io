@@ -1,32 +1,50 @@
+
 h2 {
     background-color: black;
     color: white;
     text-align: center;
+    font-size: 75px;
+    padding-bottom: 30px;
+    padding-top: 30px;
+
 }   
 .right {
     outline: blue;
     background-color: blue;
+    width: 100%;
 
 }
 .left {
     outline: red;
     background-color: red;
     width: 100%;
+    padding: 10
 }
 h3 {
-    text-size-adjust: 5px;
+    text-size-adjust: 20px;
 }
+.article > h3 {
+    text-align: center;
+}
+
 .search {
     padding-bottom: 10px;
+}
+label {
+    font-weight: bold;
 }
 #search_history {
     width: 10%;
 }
-
-.uvi {
+.bottom {
+    padding: 10%;
+    display: flex;
+     
+} 
+/* .uvi {
     padding: 5px;
 
-}
+} */
 .low {
     background-color: green;
 }
@@ -42,4 +60,10 @@ h3 {
 .extreme {
     background-color: purple;
 }
-
+.forecastCard {
+    width: 30%;
+    display: flex;
+    align-items: horizontal;
+    padding:10px;
+    
+}
